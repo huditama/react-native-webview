@@ -621,6 +621,11 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+      if(url.startsWith("whatsapp://")) {
+        view.getContext().startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(url)));
+        return true;
+      }
+
       dispatchEvent(
         view,
         new TopShouldStartLoadWithRequestEvent(
